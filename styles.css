@@ -1,0 +1,23 @@
+body {
+    background-color: black;
+    height: 100%; 
+    width: 100%; 
+    margin: 0; 
+    padding: 0; 
+    overflow: hidden;
+}
+
+.button {
+    background-color: grey;
+    color:white;
+    height: 35px;
+    width: 50px;
+    border: white solid 2px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.button:hover{
+    background-color: white;
+    color: black;
+}
