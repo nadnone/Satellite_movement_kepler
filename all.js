@@ -8,7 +8,7 @@ star.style.top = (window.innerHeight/2)-(120/2)+"px"; star.style.left = (window.
 sat.style.top = (window.innerHeight/2)-(10/2)+"px"; sat.style.left = (window.innerWidth/2)-(10/2)+"px";
 
 
-const PIXEL = 0.3
+const PIXEL = 0.2
 let speedTime = 1
 
 const GRAVITY_UNIVERSAL = 6.67430 * 10**(-11) // force
@@ -17,8 +17,8 @@ const ASTRE_MASS = 5.972 * 10**24 // kg | Earth
 
 const RAYON_TERRE = 6371 * 10**3 //m
 
-const DISTANCE_SATELITE_min = 2.5 * 10 **3 + RAYON_TERRE//m
-const DISTANCE_SATELITE_max = 5 * 10 **3 + RAYON_TERRE//m
+const DISTANCE_SATELITE_min = 250 * 10 **3 + RAYON_TERRE//m
+const DISTANCE_SATELITE_max = 500 * 10 **3 + RAYON_TERRE//m
 
 let OB = DISTANCE_SATELITE_min
 let OA = DISTANCE_SATELITE_max
@@ -39,7 +39,7 @@ function timeLoop(){
 
     let realTime = Date.now() / 1000
 
-    time += realTime * speedTime
+    time = realTime * speedTime
 
 
     let SO = Math.sqrt( SB**2 - OB**2 ) // a**2 = b**2 + c**2 => c = sqrt(a**2 - b**2)
@@ -94,7 +94,7 @@ function timeLoop(){
     Vitesse de la périphélie: ~${v_periphelie.toFixed(3)} m/s
     Vitesse de l'aphélie: ~${v_aphelie.toFixed(3)} m/s
 
-    Coordonnées du satellite: (~${x.toFixed(3)},~${y.toFixed(3)}) en metres
+    Coordonnées du satellite: (${x.toFixed(3)}m,${y.toFixed(3)}m) en metres
     Vitesse angulaire du satellite: ~${(mouvement_moyen * 3600).toFixed(3)} km/h
     Masse du satellite: ${SAT_MASSE}kg
     
