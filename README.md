@@ -7,3 +7,5 @@
 
 # Demo
 ![Demo Gif](https://github.com/spoutnik911/Satellite_movement/blob/main/res/satelliteProjet.gif?raw=true)
+
+![Demo PNG](https://github.com/spoutnik911/Satellite_movement/blob/main/res/demo.png?raw=true)
