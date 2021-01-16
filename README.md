@@ -1,9 +1,7 @@
 # Mouvement d'un satellite en orbite autour de la terre 
-- Démonstration ici: [https://nadirfelder.com/monSatellite/](https://nadirfelder.com/monSatellite/)
-
 # Movement of a satelite orbit around Earth
-- Demo here: [https://nadirfelder.com/monSatellite/](https://nadirfelder.com/monSatellite/)
+
+Live demo: [https://nadirfelder.com/monSatellite/](https://nadirfelder.com/monSatellite/)
 
 
-# Demo
-![Demo Gif](res/satelliteProjet.gif?raw=true)
+[ <img src="res/satelliteProjet.gif?raw=true" heigth="100%" width="100%"/> ](https://nadirfelder.com/monSatellite/)
