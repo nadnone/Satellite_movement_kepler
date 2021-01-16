@@ -6,4 +6,4 @@
 
 
 # Demo
-![Demo Gif](https://github.com/spoutnik911/Satellite_movement/tree/master/res/satelliteProjet.gif)
+![Demo Gif](https://github.com/spoutnik911/Satellite_movement/blob/main/res/satelliteProjet.gif?raw=true)
