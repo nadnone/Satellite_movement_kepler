@@ -1,7 +1,32 @@
 
 
-let speedTime = 1
+const PIXEL = 0.05
 
+const GRAVITY_UNIVERSAL = 6.67430 * 10**(-11) // force
+const SAT_MASSE = 150 // kg Artificial Satelite
+const ASTRE_MASS = 5.972 * 10**24 // kg | Earth
+
+const RAYON_TERRE = 6371 * 10**3 //m
+
+const DISTANCE_SATELITE_min = 300 * 10**3 + RAYON_TERRE//m
+const DISTANCE_SATELITE_max = 400 * 10**3 + RAYON_TERRE//m
+
+const RATIO_ECRAN = window.innerWidth/window.innerHeight
+
+let speedTime = 1
+let SB = 0
+let ratio_e = 1
+let realTime
+let t_time = false
+
+pixel_range = PIXEL * RATIO_ECRAN
+
+// initialisation des ranges
+document.getElementById("speedtime_range").value = speedTime
+document.getElementById("scale_range").value = pixel_range
+document.getElementById("grand_axe").value = (DISTANCE_SATELITE_max - RAYON_TERRE) / 1000
+document.getElementById("excentreticity_range").value = ratio_e
+document.getElementById("t_time").value = 0
 
 function satellite(){
 
@@ -11,24 +36,14 @@ function satellite(){
     
     // positions initiales
     star.style.top = (window.innerHeight/2)-(120/2)+"px"; star.style.left = (window.innerWidth/2)-(120/2)+"px";
-    sat.style.top = (window.innerHeight/2)-(29/2)+"px"; sat.style.left = (window.innerWidth/2)-(20/2)+"px";
+    sat.style.top = (window.innerHeight/2)-(10/2)+"px"; sat.style.left = (window.innerWidth/2)-(10/2)+"px";
     
-    
-    const PIXEL = 0.05
-    
-    const GRAVITY_UNIVERSAL = 6.67430 * 10**(-11) // force
-    const SAT_MASSE = 150 // kg Artificial Satelite
-    const ASTRE_MASS = 5.972 * 10**24 // kg | Earth
-    
-    const RAYON_TERRE = 6371 * 10**3 //m
-    
-    const DISTANCE_SATELITE_min = 300 * 10**3 + RAYON_TERRE//m
-    const DISTANCE_SATELITE_max = 400 * 10**3 + RAYON_TERRE//m
+   
     
     let OB = DISTANCE_SATELITE_min
     let OA = DISTANCE_SATELITE_max
 
-    let SB = OA
+    SB = OA
 
     const FOYER_SX = Math.sqrt( SB**2 - OB**2 )
 
@@ -38,19 +53,27 @@ function satellite(){
     
     function timeLoop(){
     
-        const RATIO_ECRAN = window.innerWidth/window.innerHeight
     
         let timestamp_GMT = new Date().getTimezoneOffset() * 60*10**3
         
-        let realTime = Date.now()+timestamp_GMT
-    
+        
+
+        // time t range check
+        if(!t_time) realTime = Date.now()+timestamp_GMT
+        else if(t_time) realTime = document.getElementById("t_time").value * 1000
+
+        // initialize time t range
+        document.getElementById("t_time").setAttribute("min", 0)
+        document.getElementById("t_time").setAttribute("max", T)
+
+
         let time = realTime * speedTime / 1000
     
     
         let SO = Math.sqrt( SB**2 - OB**2 ) // a**2 = b**2 + c**2 => c = sqrt(a**2 - b**2)
     
     
-        let e = SO/SB // excentricité (applatissement de l'elipse)
+        let e = (SO/SB) * ratio_e// excentricité (applatissement de l'elipse)
     
         let angle_OAP = (2*Math.PI/T) * time
     
@@ -75,14 +98,12 @@ function satellite(){
     
         let OP = HP / Math.sin(anomalie_moyenne)
         
-        let R = OP;
-    
         let v_eloignement = Math.sqrt(1/SB)
     
     
         //coordonées          
-        let x = OH * PIXEL * v_eloignement * RATIO_ECRAN
-        let y = HP * PIXEL * v_eloignement * RATIO_ECRAN
+        let x = OH  * v_eloignement * pixel_range
+        let y = HP  * v_eloignement * pixel_range
     
         sat.style.setProperty("left", `${parseFloat(star.style.left+star.style.width/2) + x}px`)
         sat.style.setProperty("top", `${parseFloat(star.style.top+star.style.height/2) + y}px`)
@@ -105,12 +126,13 @@ function satellite(){
         Masse du satellite: ${SAT_MASSE}kg
         
         Excentricité: ~${e.toFixed(5)}
-        Rayon: ~ ${Math.abs((((R).toFixed(3)-RAYON_TERRE)/1000).toFixed(3))} km
+        Rayon: ~ ${( Math.abs((RAYON_TERRE-OP)/1000 ).toFixed(3))} km
+        Grand axe: ${(SB-RAYON_TERRE)/1000} km
         
-        Echelle de distance: 1m = ~${(PIXEL*RATIO_ECRAN).toFixed(3)}pixel (s'adapte à l'écran)
+        Echelle de distance: 1m = ~${(pixel_range).toFixed(3)}pixel (s'adapte à l'écran)
         Echelle de temps: 1*${speedTime.toFixed(2)} seconde
     
-        Temps: ${new Date(realTime).getHours()}:${new Date(realTime).getMinutes()}:${new Date(realTime).getSeconds()} (Heure de Greenwich)        
+        Temps: ${new Date(realTime).getHours()}H ${new Date(realTime).getMinutes()}m ${new Date(realTime).getSeconds()}s (heure de Greenwich)        
         ` ; 
     
         if(time > T) time = 0
@@ -129,11 +151,40 @@ window.addEventListener("resize", () => {
         window.location.href = document.URL
 });
 
-function changespeed(speed){
-    speedTime *= speed
-    if (speed == 0 ) speedTime = 1
+function changeTimespeed(speed){
+    speedTime = speed
+}
+
+function ChangeOA(d){
+    SB = (d * 10**3) + RAYON_TERRE
+}
+
+function excentreticity(ratio){
+    ratio_e = ratio
+}
+function change_t_time(){
+    t_time = true
+}
+
+function reset(){
+
+
+
+    speedTime = 1
+    SB = DISTANCE_SATELITE_max
+    ratio_e = 1
+    t_time = false
+
+    // ré initialisation des ranges
+    document.getElementById("speedtime_range").value = speedTime
+    document.getElementById("scale_range").value = pixel_range
+    document.getElementById("grand_axe").value = (DISTANCE_SATELITE_max-RAYON_TERRE) / 1000
+    document.getElementById("excentreticity_range").value = ratio_e
+    document.getElementById("t_time").value = 0
+
+
 }
 
 
-if(window.innerWidth > 701 || window.innerHeight > 401) satellite()
+if(window.innerWidth > 601 || window.innerHeight > 401) satellite()
  
