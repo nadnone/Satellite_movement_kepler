@@ -36,7 +36,7 @@ function satellite(){
     
     // positions initiales
     star.style.top = (window.innerHeight/2)-(120/2)+"px"; star.style.left = (window.innerWidth/2)-(120/2)+"px";
-    sat.style.top = (window.innerHeight/2)-(10/2)+"px"; sat.style.left = (window.innerWidth/2)-(10/2)+"px";
+    sat.style.top = (window.innerHeight/2)-(200/2)+"px"; sat.style.left = (window.innerWidth/2)-(50/2)+"px";
     
    
     
@@ -121,7 +121,7 @@ function satellite(){
         Bienvenue sur mon tableau de bord, voici mon satellite imaginaire.
 
     
-        Coordonnées du satellite: (${x.toFixed(3)}m,${y.toFixed(3)}m)
+        Coordonnées du satellite: (${x.toFixed(3)}m,${y.toFixed(3)*-1}m)
         Vitesse angulaire du satellite: ~${(mouvement_moyen * 3600).toFixed(3)} km/h
         Masse du satellite: ${SAT_MASSE}kg
         
@@ -174,6 +174,7 @@ function reset(){
     SB = DISTANCE_SATELITE_max
     ratio_e = 1
     t_time = false
+    pixel_range = PIXEL * window.innerWidth/window.innerHeight
 
     // ré initialisation des ranges
     document.getElementById("speedtime_range").value = speedTime
