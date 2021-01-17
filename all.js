@@ -44,10 +44,7 @@ function satellite(){
 
     SB = OA
 
-    const FOYER_SX = Math.sqrt( SB**2 - OB**2 )
-
-    
-    let T = 2 * Math.PI * Math.sqrt( SB**3 / (GRAVITY_UNIVERSAL * ASTRE_MASS) )
+    const T = 2 * Math.PI * Math.sqrt( SB**3 / (GRAVITY_UNIVERSAL * ASTRE_MASS) )
     
     
     function timeLoop(){
@@ -75,18 +72,11 @@ function satellite(){
         const angle_OAP = (2*Math.PI/T) * time
     
     
-        //let angle_BSO = Math.sin( OB * Math.sin(90) / SB )
-    
         const mouvement_moyen = 2*Math.PI/T
 
         const moment_cinetique_periapside = Math.sqrt( (1-e**2)*GRAVITY_UNIVERSAL*ASTRE_MASS* SB)
     
         const anomalie_moyenne = mouvement_moyen * (time - moment_cinetique_periapside)
-    
-    
-        //let AS = OA - SO;
-    
-        //let SP = SB * ( 1 - e * Math.cos(angle_OAP) )
     
         const SH = SB * ( Math.cos(angle_OAP - e) )
         const HP = SB * Math.sqrt( 1 - e**2 ) * Math.sin(angle_OAP)
@@ -98,10 +88,10 @@ function satellite(){
         const v_eloignement = Math.sqrt(1/SB)
     
     
+        
         //coordonées          
-
-        let x = (OH * v_eloignement) * d_pixel_Range
-        let y = (HP * v_eloignement) * d_pixel_Range
+        const x = (OH * v_eloignement) * d_pixel_Range
+        const y = (HP * v_eloignement) * d_pixel_Range
 
         let star = document.getElementById("earth");
         let sat = document.getElementById("sat");
@@ -147,9 +137,7 @@ function satellite(){
         
         Temps: ${new Date(time*1000).getHours()}H ${new Date(time*1000).getMinutes()}m ${new Date(time*1000).getSeconds()}s (heure de Greenwich)        
 
-
-        ` ; 
-        document.getElementById("infobox").innerHTML += `Repo GitHub : spoutnik911/Satellite_movement_kepler`
+        Repo GitHub : spoutnik911/Satellite_movement_kepler`;
     }
     
     setInterval(timeLoop, 60);
@@ -182,9 +170,8 @@ function change_t_time(){
 function change_d_scale(d){
     d_pixel_Range = 1/d
 }
+
 function reset(){
-
-
 
     speedTime = 1
     SB = DISTANCE_SATELITE_max
@@ -202,7 +189,6 @@ function reset(){
     document.getElementById("excentreticity_range").value = ratio_e
     document.getElementById("t_time").value = 0
     document.getElementById("scale_sat_range").value = scale_Sat
-
 
 }
 

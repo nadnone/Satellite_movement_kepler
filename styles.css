@@ -9,7 +9,7 @@ body {
     border-radius: 50%;
     background-color: #135cdb; 
     position: absolute;
-    background-image: url("/res/earth.svg");
+    background-image: url("earth.svg");
     background-size: 100%;
 }
 
