@@ -13,7 +13,7 @@
 
 
 
-      <div id="star"></div>
+      <div id="earth"></div>
 
       <div id="sat" style="height: 200px; width: 50px; background-image: url('satelite.png'); background-size: 100%; background-repeat: no-repeat; position: absolute;"></div>
 
@@ -33,19 +33,30 @@
 
           <div class="range_div">
             Vitesse du temps
-            <input id="speedtime_range" type="range" max="3000" min="1" step="20" onchange="changeTimespeed(parseFloat(this.value))">
+            <input id="speedtime_range" type="range" max="3600" min="1" step="1" onchange="changeTimespeed(parseFloat(this.value))">
           </div>
 
           <div class="range_div">
             Instant t
-            <input id="t_time" type="range" max="" min="" step="1" onchange="change_t_time()" >
+            <input id="t_time" type="range" max="" min="" step="1" onchange="change_t_time()">
           </div>
 
           <div class="range_div">
-            Ratio des distances
-            <input id="scale_range" type="range" max="0.4" min="0.05" step="0.01" onchange="pixel_range=parseFloat(this.value)">
-            </div>
+            Ratio des tailles
+            <input id="scale_range" type="range" max="100000" min="10000" step="100" onchange="pixel_range=parseFloat(this.value)">
+          </div>
+
+
+          <div class="range_div">
+            Taille du satellite
+            <input id="scale_sat_range" type="range" max="1000000" min="1" step="100" onchange="scale_Sat=parseFloat(this.value)">
+          </div>
             
+          <div class="range_div">
+            Ratio des Distances
+            <input id="scale_d" type="range" max="20" min="1" step="1" onchange="change_d_scale(parseFloat(this.value))">
+          </div>
+
           <div class="button" onclick="reset(0)">
             reset
           </div>
