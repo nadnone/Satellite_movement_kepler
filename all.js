@@ -137,7 +137,7 @@ function satellite(){
         
         Temps: ${new Date(time*1000).getHours()}H ${new Date(time*1000).getMinutes()}m ${new Date(time*1000).getSeconds()}s (heure de Greenwich)        
 
-        Repo GitHub : spoutnik911/Satellite_movement_kepler`;
+        Repo GitHub : nadnone/Satellite_movement_kepler`;
     }
     
     setInterval(timeLoop, 60);
