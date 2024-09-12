@@ -19,7 +19,7 @@ let ratio_e = 1
 let realTime
 let t_time = false
 let scale_Sat = 3
-let scale_astre = 4 *  1/10**6
+let scale_astre = 4 * 1/10**6
 
 const PIXEL_RANGE_DEFAULT = PIXEL * RATIO_ECRAN 
 
@@ -112,22 +112,24 @@ function satellite(){
         // tableau de bord
         document.getElementById("infobox").innerText = `
         Bienvenue sur mon tableau de bord, voici mon satellite imaginaire.
-    
-        Coordonnées du satellite (taille réelle): (${(x/d_pixel_Range/1000).toFixed(3)}km, ${(y/d_pixel_Range/1000).toFixed(3)*-1}km) 
+
         Coordonnées du satellite (taille écran): (${x.toFixed(3)}px, ${y.toFixed(3)*-1}px)
+        Distance satellite - terre (écran): ${ (Math.sqrt(x**2 + y**2).toFixed(3))} px
         Vitesse radiale: ~${(v_radiale/1000).toFixed(3)} km/s 
 
         Excentricité: ~${e.toFixed(5)}
         Grand axe: ${(SB-RAYON_TERRE)/1000} km
         
-        Echelle de tailles (s'adapte à l'écran): 1m x ${((1/pixel_range)*10**5).toFixed(6)} x10^6 px
-        Echelle de distances: 1m x ${(d_pixel_Range*10**2).toFixed(3)} x10^2 px
         Echelle de temps: 1x${(speedTime).toFixed(2)}
-        Tailles du satellite: ${SAT_HAUTEUR*SAT_LARGEUR}m^2 x ${((1/scale_Sat)*10**6).toFixed(4)} x10^6 px      
-        Masse du satellite: ${SAT_MASSE}kg
         
         Temps: ${new Date(time*1000).getHours()}H ${new Date(time*1000).getMinutes()}m ${new Date(time*1000).getSeconds()}s (heure de Greenwich)        
-        Repo GitHub : nadnone/Satellite_movement_kepler`;
+        Repo GitHub : nadnone/Satellite_movement_kepler
+        
+        
+        (les distances "réelles" n'ont pas l'air fiables)
+        Update: 12.09.2024`;
+
+
     }
     
     setInterval(timeLoop, 60);
